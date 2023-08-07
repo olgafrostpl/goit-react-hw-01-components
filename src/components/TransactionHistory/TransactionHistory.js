@@ -1,28 +1,35 @@
-import { Wrapper, TitleText, Row, Value } from './TransactionHistory.styled';
+import PropTypes from 'prop-types';
+import { Body, Head, ItemVal, RowItem, Table, Title, TitleVal } from "./TransactionHistory.styled"
 
-export function TransactionHistory({transactions}) {
-    return (
-        <Wrapper>
-            <thead>
-                <tr>
-                    {Object.keys(transactions[0]).map(obj => {
-                 
-                        if (obj === "id") {
-                            return null;
-                        }
-                        return <TitleText key={obj}>{obj}</TitleText>
-                    })}
-                </tr>    
-            </thead>
-            <tbody>
-                {transactions.map(({ id, type, amount, currency}, index) => (
-                <Row key={id} className ={(index % 2 === 0) ? true : false }>
-                    <Value>{type}</Value>
-                    <Value>{amount}</Value>
-                    <Value>{currency}</Value>
-                </Row>
-            ))}
-            </tbody>
-        </Wrapper>  
-    );
+export const TransactionHistory = ({items}) => {
+ return (
+    <Table>
+         <Head>
+          <Title>
+            <TitleVal>Type</TitleVal>
+            <TitleVal>Amount</TitleVal>
+            <TitleVal>Currency</TitleVal>
+          </Title>
+        </Head>
+        
+        <Body>
+        {items.map(({ id, type, amount, currency })  => (
+            <RowItem key={id}>
+                <ItemVal>{type}</ItemVal>
+                <ItemVal>{amount}</ItemVal>
+                <ItemVal>{currency}</ItemVal>
+            </RowItem>))} 
+        </Body>
+    </Table>)
 }
+
+TransactionHistory.propTypes = {
+    items: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        type: PropTypes.string.isRequired,
+        amount: PropTypes.string.isRequired,
+        currency: PropTypes.string.isRequired,
+      })
+    ).isRequired,
+  };

@@ -1,31 +1,50 @@
-import { Container, Wrapper, Image, List, ListItems, Span } from './Profile.styled';
+import PropTypes from 'prop-types';
+import { Card,
+  Description,
+  Image,
+  Username,
+  Usertag,
+  Location,
+  Stats,
+  Stat,
+  Label,
+  Quantity, } from "./Profile.styled"
 
-export function Profile({user: {username,tag,location,avatar, stats: {followers,views,likes}}}) {
-    return (
-        <Container>
-            <Wrapper>
-                <Image
-                    src={avatar}
-                    alt={username}
-                />
-                <p><b>{username}</b></p>
-                <p>{tag}</p>
-                <p>{location}</p>
-            </Wrapper>
-            <List>
-                <ListItems>
-                    <span>Followers</span>
-                    <Span>{followers}</Span>
-                </ListItems>
-                <ListItems>
-                    <span>Views</span>
-                    <Span>{views}</Span>
-                </ListItems>
-                <ListItems>
-                    <span>Likes</span>
-                    <Span>{likes}</Span>
-                </ListItems>
-            </List>
-        </Container>   
-    );
+export const Profile = ({ avatar, username, location, stats, tag}) => {
+  return (
+    <Card>
+      <Description>
+        <Image src={avatar} alt={username} />
+        <Username>{username}</Username>
+        <Usertag>{tag}</Usertag>
+        <Location>{location}</Location>
+      </Description>
+
+      <Stats>
+        <Stat>
+          <Label>Followers</Label>
+          <Quantity>{stats.followers}</Quantity>
+        </Stat>
+        <Stat>
+          <Label>Views</Label>
+          <Quantity>{stats.views}</Quantity>
+        </Stat>
+        <Stat>
+          <Label>Likes</Label>
+          <Quantity>{stats.likes}</Quantity>
+        </Stat>
+      </Stats>
+    </Card>)
 }
+
+Profile.propTypes = {
+  avatar: PropTypes.string.isRequired, 
+  username: PropTypes.string.isRequired, 
+  location: PropTypes.string.isRequired, 
+  stats: PropTypes.shape({
+    followers: PropTypes.number.isRequired,
+    views: PropTypes.number.isRequired,
+    likes: PropTypes.number.isRequired,
+  }).isRequired, 
+  tag: PropTypes.string.isRequired,
+};

@@ -1,24 +1,52 @@
 import { styled } from "styled-components";
 
-export const Wrapper = styled.table`
-    width: 600px;
-    margin: 50px auto;
-    background-color: white;
-    box-shadow: 5px 5px 5px #8080808a;
+export const Table = styled.table`
+  border-collapse: collapse;
 `;
 
-export const TitleText = styled.th`
-    text-transform: uppercase;
-    padding: 10px;
-    background-color: rgb(254 79 96 / 78%);
-    width: 200px;
+export const Head = styled.thead``;
+
+export const Title = styled.tr``;
+
+export const TitleVal = styled.th`
+  width: 300px;
+
+  padding: 10px 0;
+
+  background-color: #00bcd5;
+  color: #ffffff;
+
+  font-size: 16px;
+  line-height: 1.2;
+  letter-spacing: 1.25px;
+
+  text-transform: uppercase;
+
+  &:not(:last-child) {
+    border-right: 1px solid #ffffff;
+  }
 `;
 
-export const Row = styled.tr`
-    background-color: ${props => props.className ? '#ff788421' : '#ff788461'};
+export const Body = styled.tbody``;
+
+export const RowItem = styled.tr`
+  &:nth-of-type(2n) {
+    background-color: #eeeeee;
+  }
 `;
 
-export const Value = styled.td`
-    text-align: center;
-    padding: 4px;
+export const ItemVal = styled.td`
+  margin: 0;
+
+  padding: 10px 0;
+
+  color: #797979;
+
+  text-align: center;
+
+  font-size: 16px;
+
+  &:not(:last-child) {
+    border-right: 1px solid #e9e9e9;
+  }
 `;

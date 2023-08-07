@@ -1,23 +1,29 @@
-import { Wrapper, TitleList, List, ListItems } from './Statistics.styled';
+import PropTypes from 'prop-types';
+import { Element, Label, List, Percentage, Section, Title } from "./Statistics.styled"
 
-export function Statistics({data, title=null}) {
+export const Statistics = ({title, stats}) => {
     return (
-        <Wrapper>
-            <TitleList>{title}</TitleList>
+        <Section>
+            {title && <Title>{title}</Title> }
+
             <List>
-                {data.map(({ id, label, percentage }) =>
-                    
-                        <ListItems key={id} style={{ backgroundColor: setBg() }}>
-                            <span>{label}</span>
-                            <span><b>{percentage}%</b></span>
-                        </ListItems>
-                    )}
+                {stats.map( data => (
+                    <Element key={data.id} label={data.label}>
+                        <Label>{data.label}</Label>
+                        <Percentage>{data.percentage}</Percentage>
+                    </Element>
+                    ))}
             </List>
-        </Wrapper>
-    );
+        </Section>)
 }
 
-const setBg = () => {
-    const color = Math.floor(Math.random() * 16777215).toString(16);
-    return "#" + color;
+Statistics.propTypes = {
+    title: PropTypes.string.isRequired,
+    stats: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        label: PropTypes.string.isRequired,
+        percentage: PropTypes.number.isRequired,
+      }).isRequired
+    ).isRequired,
 };
